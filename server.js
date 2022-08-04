@@ -11,9 +11,9 @@ MongoClient.connect('mongodb+srv://admin:admin123@cluster0.gvddnzw.mongodb.net/?
     // connect with the database
     db = client.db('todoapp');
 
-    db.collection('post').insertOne({name: 'John', age: 20} , (err, client) => {
-        console.log('saved!!!!')
-    });
+    // db.collection('post').insertOne({name: 'John', age: 20} , (err, client) => {
+    //     console.log('saved!!!!')
+    // });
 
     app.listen(port, () => {
         console.log("Listening on port 8080")
@@ -30,7 +30,11 @@ app.get('/write', (req, res) => {
 })
 
 app.post('/add', (req, res) => {
-    console.log(req.body);
-    res.send('Send Complete')
+    console.log(req.body.task);
+    console.log(req.body.date);
+    db.collection('post').insertOne({task: req.body.task, date: req.body.date} , (err, res) => {
+        console.log('data saved!')
+    })
+    res.redirect('/')
 })
 
