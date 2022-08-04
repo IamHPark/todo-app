@@ -3,7 +3,18 @@ const app = express();
 const port = 8080;
 const MongoClient = require('mongodb').MongoClient;
 
-MongoClient.connect('mongodb+srv://admin:<password>@cluster0.gvddnzw.mongodb.net/?retryWrites=true&w=majority', (err, client) => {
+let db;
+
+MongoClient.connect('mongodb+srv://admin:admin123@cluster0.gvddnzw.mongodb.net/?retryWrites=true&w=majority', (err, client) => {
+    if(err) return console.log(err);
+
+    // connect with the database
+    db = client.db('todoapp');
+
+    db.collection('post').insertOne({name: 'John', age: 20} , (err, client) => {
+        console.log('saved!!!!')
+    });
+
     app.listen(port, () => {
         console.log("Listening on port 8080")
     })
