@@ -32,7 +32,10 @@ app.get('/write', (req, res) => {
 })
 
 app.get('/list', (req, res) => {
-    res.render('list.ejs')
+
+    db.collection('post').find().toArray((err, data) => {
+        res.render('list.ejs', {tasks : data})
+    });
 });
 
 app.post('/add', (req, res) => {
