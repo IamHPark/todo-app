@@ -19,7 +19,9 @@ MongoClient.connect('mongodb+srv://admin:admin123@cluster0.gvddnzw.mongodb.net/?
         console.log("Listening on port 8080")
     })
 })
+
 app.use(express.urlencoded({extended: true}));
+app.set('view engine', 'ejs');
 
 app.get('/', (req, res) => {
     res.sendFile(__dirname + '/index.html')
@@ -28,6 +30,10 @@ app.get('/', (req, res) => {
 app.get('/write', (req, res) => {
     res.sendFile(__dirname + '/write.html')
 })
+
+app.get('/list', (req, res) => {
+    res.render('list.ejs')
+});
 
 app.post('/add', (req, res) => {
     console.log(req.body.task);
