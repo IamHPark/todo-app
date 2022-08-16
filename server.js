@@ -21,6 +21,8 @@ MongoClient.connect('mongodb+srv://admin:admin123@cluster0.gvddnzw.mongodb.net/?
 })
 
 app.use(express.urlencoded({extended: true}));
+app.use(express.static(__dirname + '/public'));
+
 app.set('view engine', 'ejs');
 
 app.get('/', (req, res) => {
@@ -28,7 +30,7 @@ app.get('/', (req, res) => {
 })
 
 app.get('/write', (req, res) => {
-    res.sendFile(__dirname + '/write.html')
+    res.sendFile(__dirname + '/public/write.html')
 })
 
 app.get('/list', (req, res) => {
@@ -41,8 +43,17 @@ app.get('/list', (req, res) => {
 app.post('/add', (req, res) => {
     console.log(req.body.task);
     console.log(req.body.date);
-    db.collection('post').insertOne({task: req.body.task, date: req.body.date} , (err, res) => {
-        console.log('data saved!')
+    db.collection('counter').findOne({name: "totalNumOfPosts"}, (err, data) => {
+        // console.log('counter', data)
+        const numOfPost = data.totalPost;
+        console.log('numOfPost', numOfPost)
+        db.collection('post').insertOne({ _id: numOfPost + 1, task: req.body.task, date: req.body.date} , (err, res) => {
+            db.collection('post').find().toArray((err, data) => {
+                console.log(data)
+            })
+        })
+
+        db.collection('counter').updateOne({totalPost: numOfPost + 1 })
     })
     res.redirect('/')
 })

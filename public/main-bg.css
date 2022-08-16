@@ -1,0 +1,19 @@
+h1 {
+    font-size: 2.5rem;
+    text-align: center;
+    margin: 40px;
+}
+
+.write-form {
+    width: 70%;
+    margin: 30px auto;
+}
+
+.card {
+    width: 70%;
+    margin: 10px auto;
+    border: none;
+    background-color: #eef4f6;
+    border-radius: 30px;
+    padding: 30px;
+}
