@@ -41,20 +41,25 @@ app.get('/list', (req, res) => {
 });
 
 app.post('/add', (req, res) => {
-    console.log(req.body.task);
-    console.log(req.body.date);
-    db.collection('counter').findOne({name: "totalNumOfPosts"}, (err, data) => {
-        // console.log('counter', data)
-        const numOfPost = data.totalPost;
-        console.log('numOfPost', numOfPost)
-        db.collection('post').insertOne({ _id: numOfPost + 1, task: req.body.task, date: req.body.date} , (err, res) => {
-            db.collection('post').find().toArray((err, data) => {
-                console.log(data)
+
+    db.collection('counter').findOne({name: 'countPost'}, (err, res) => {
+        console.log(res.totalPost);
+        let count = res.totalPost;
+
+        db.collection('post').insertOne({_id: count + 1, task: req.body.task, date: req.body.date}, (err, res) => {
+
+            // counter DB should increase 1
+            db.collection('counter').updateOne({name: 'countPost'}, { $inc : {totalPost: 1}},(err, res)=> {
+                if(err) return console.log(err.message);
+                console.log("updated counter")
             })
         })
 
-        db.collection('counter').updateOne({totalPost: numOfPost + 1 })
+
     })
-    res.redirect('/')
+
+
+
+    res.redirect('/list')
 })
 
