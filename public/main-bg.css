@@ -9,27 +9,20 @@ h1 {
     margin: 30px auto;
 }
 
-.card {
-    width: 70%;
-    margin: 10px auto;
-    border: none;
-    background-color: #eef4f6;
-    border-radius: 30px;
-    padding: 20px 30px;
+.list {
+    padding: 10px 5vw;
     display: flex;
     flex-direction: row;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
-    box-shadow: #afd3df 2px 2px
 }
 
 .card-btn {
     border: none;
     background-color: #81a7d0;
     color: white;
-    padding: 15px 30px;
+    padding: 1rem 1.5rem;
     border-radius: 10px;
-    font-size: 1.3rem;
 }
 
 .card-btn:hover {

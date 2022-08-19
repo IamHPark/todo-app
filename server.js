@@ -57,9 +57,16 @@ app.post('/add', (req, res) => {
 
 
     })
-
-
-
     res.redirect('/list')
 })
+
+app.delete('/list', (req, res) => {
+    console.log(req.body);
+    req.body._id = parseInt(req.body._id)
+
+    db.collection('post').deleteOne( req.body, (err, res) => {
+        console.log('deleted!')
+    });
+})
+
 

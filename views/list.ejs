@@ -44,15 +44,31 @@
       </div>
     </nav>
     <h1>List todo</h1>
-    <% tasks.forEach( task => { %>
-    <div class="card">
-      <div class="card-body">
-        <h2>할일 : <%= task.task %></h2>
-        <h3>날짜 : <%= task.date %></h3>
-      </div>
-      <button class="card-btn">Done</button>
-    </div>
-    <% }) %>
+
+    <ul class="list-group">
+      <% tasks.forEach( task => { %>
+      <li class="list-group-item list">
+        <div class="content">
+          <h3><%= task.task %></h3>
+          <p><%= task.date %></p>
+        </div>
+        <button type="submit" class="card-btn">Done</button>
+      </li>
+      <% }) %>
+    </ul>
+
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script> -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+
+    <script>
+      $.ajax({
+        method: "DELETE",
+        url: "/list",
+        data: { _id: 1 },
+      }).done((data) => {
+        console.log("data", data);
+      });
+    </script>
 
     <!-- bootstrap -->
     <script
