@@ -61,18 +61,25 @@
     <!-- <script src="https://code.jquery.com/jquery-3.1.1.min.js"> -->
 
     <script>
-      $(() => {
-        $(".delete-btn").click((e) => {
-          let id = e.target.dataset.id;
+      $(".delete-btn").click(function (e) {
+        let id = e.target.dataset.id;
+        console.log(id);
+        console.log($(this));
 
-          $.ajax({
-            method: "DELETE",
-            url: "/list",
-            data: { _id: id },
-          }).done((data) => {
+        $.ajax({
+          method: "DELETE",
+          url: "/list",
+          data: { _id: id },
+        })
+          .done((data) => {
             console.log("data", data);
+            console.log("success!");
+            console.log($(this).parent("li"));
+            $(this).parent("li").fadeOut();
+          })
+          .fail(() => {
+            console.log("fail");
           });
-        });
       });
     </script>
 
