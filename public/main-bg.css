@@ -17,7 +17,7 @@ h1 {
     align-items: center;
 }
 
-.card-btn {
+.delete-btn {
     border: none;
     background-color: #81a7d0;
     color: white;
@@ -25,6 +25,6 @@ h1 {
     border-radius: 10px;
 }
 
-.card-btn:hover {
+.delete-btn:hover {
     background-color: #1b74d4;
 }
